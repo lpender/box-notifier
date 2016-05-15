@@ -1,3 +1,24 @@
+var itemList = document.getElementById('item-list');
+var listItem = itemList && itemList.childNodes[5];
+var myAudio = new Audio();
+myAudio.src = "https://s3.amazonaws.com/box-notification/new_file.mp3";
+
+function startPlaying() {
+  playAudio();
+
+  var audioInterval = setInterval(function() {
+    playAudio();
+  }, 3000);
+
+  document.body.addEventListener('click', function () {
+    clearInterval(audioInterval);
+  });
+}
+
+function playAudio () {
+  myAudio.play();
+}
+
 observer = new MutationObserver(function(records){
   console.log(records);
 
@@ -5,17 +26,16 @@ observer = new MutationObserver(function(records){
     var $el = $(record.target.parentElement);
 
     if ($el.hasClass('item_link') && record.type == "characterData") {
-      alert('update');
-    } else if (record.addedNodes.length) {
-      alert('added');
+      startPlaying();
+    } else {
+      if (record.addedNodes.length && record.addedNodes[0].tagName == "LI") {
+        startPlaying();
+      }
     }
   });
 });
 
-var itemList = document.getElementById('item-list');
-observer.observe(itemList, { childList: true, subtree: true, characterData: true })
-
-var listItem = itemList.childNodes[5];
+observer.observe(itemList, { childList: true, subtree: true, characterData: true });
 
 function simulateAdd () {
   var clone = listItem.cloneNode(true);
