@@ -1,6 +1,6 @@
 var itemList = document.getElementById('item-list');
 var myAudio = new Audio();
-myAudio.src = "https://s3.amazonaws.com/box-notification/new_file.mp3";
+myAudio.src = "https://s3.amazonaws.com/box-notification/Puff.mp3";
 
 function startPlaying() {
   myAudio.play();
