@@ -7,8 +7,7 @@
     "content_scripts" : [
       {
         "matches": [
-          "http://*/*",
-          "https://*/*"
+          "https://app.box.com/files/*"
         ],
         "js": ["jquery-2.1.3.min.js", "index.js"],
         "run_at": "document_end"
